@@ -1,0 +1,16 @@
+#sensitive data
+.env
+
+# Python-Cache
+__pycache__/
+*.pyc
+
+# Editor / IDE Dateien
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Docker
+.docker/
