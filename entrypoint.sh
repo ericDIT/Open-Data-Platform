@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+export PYTHONPATH="/opt/airflow/include:/opt/airflow/dags"
 
 echo "Initialize Airflow..."
 airflow db init
@@ -20,6 +20,7 @@ else
     echo "Admin-User created!"
 fi
 
-echo "Starting Airflow webserver"
-exec airflow webserver
-echo "Airflow webserver started"  
+echo "Starting Airflow webserver..."
+airflow webserver &
+echo "Starting Airflow scheduler..."
+exec airflow scheduler

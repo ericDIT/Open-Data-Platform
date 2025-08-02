@@ -17,9 +17,13 @@ services:
       - db
     env_file:
       - .env
+    environment:
+      - PYTHONPATH=/opt/airflow/include:/opt/airflow/dags  
     volumes:
       - ./dags:/opt/airflow/dags
+      - ./include:/opt/airflow/include
       - ./entrypoint.sh:/entrypoint.sh
+      - ./data:/opt/airflow/data
     ports:
       - "8080:8080"
     command: bash /entrypoint.sh

@@ -1,0 +1,2 @@
+city_name,city_id,lon,lat,temperature,feels_like,temp_min,temp_max,pressure,humidity,sea_level,grnd_level,weather_id,weather_main,weather_description,weather_icon,wind_speed,wind_deg,wind_gust,clouds_all,visibility,country,sunrise_utc,sunset_utc,data_received_timestamp_utc,extraction_timestamp_utc
+Berlin,2950159,13.4105,52.5244,21.11,21.05,19.43,21.66,1011,68,1011,1006,800,Clear,clear sky,01d,2.68,240,6.26,0,10000,DE,2025-08-02 03:27:39+00:00,2025-08-02 18:57:28+00:00,2025-08-02 18:39:23+00:00,2025-08-02 18:41:47.747876+00:00
