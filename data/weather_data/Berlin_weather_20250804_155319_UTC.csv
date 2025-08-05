@@ -1,0 +1,2 @@
+city_name,city_id,lon,lat,temperature,feels_like,temp_min,temp_max,pressure,humidity,sea_level,grnd_level,weather_id,weather_main,weather_description,weather_icon,wind_speed,wind_deg,wind_gust,clouds_all,visibility,country,sunrise_utc,sunset_utc,data_received_timestamp_utc,extraction_timestamp_utc
+Berlin,2950159,13.4105,52.5244,22.75,22.88,22.19,23.83,1015,69,1015,1010,801,Clouds,few clouds,02d,4.92,261,8.94,20,10000,DE,2025-08-04 03:30:52+00:00,2025-08-04 18:53:59+00:00,2025-08-04 15:40:13+00:00,2025-08-04 15:53:19.246222+00:00
