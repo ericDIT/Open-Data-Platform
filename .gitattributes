@@ -1,3 +1,7 @@
 * text=auto
 
 *.sh text eol=lf
+
+*.sql linguist-detectable=true
+*.sql linguist-language=sql
+*.sql text
