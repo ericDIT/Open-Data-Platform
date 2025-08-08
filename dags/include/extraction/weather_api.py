@@ -2,12 +2,16 @@ import requests
 import os
 import pandas as pd
 from datetime import datetime, timezone
+import logging
+
+log = logging.getLogger(__name__)
 
 def fetch_weather_data():
     api_key = os.getenv("OPENWEATHER_API_KEY")
     city = os.getenv("CITY")
 
     if not api_key or not city:
+        log.error("Error occured with getting City or API-Key from .env")
         raise ValueError("API-Key and City not set, please check your .env file")
 
     #in C instead of K units
@@ -18,7 +22,7 @@ def fetch_weather_data():
         response.raise_for_status()
         raw_data = response.json()
     except requests.exceptions.RequestException as error_message:
-        print(f"Request failed: {error_message}")
+        log.error(f"Request failed: {error_message}")
         return None
     
     try:
@@ -60,12 +64,12 @@ def fetch_weather_data():
         csv_file_name = f"{city}_weather_{timestamp_str}.csv"
         csv_file_path = os.path.join(target_container_data_path, csv_file_name)
         df.to_csv(csv_file_path, index=False)
-        print(f'Data saved to {csv_file_path}')
+        log.info(f'Data saved to {csv_file_path}')
         return csv_file_path
 
     except KeyError as k:
-        print(f"KeyError trying to convert the raw data to csv with key: {k} and raw data: {raw_data}")
+        log.error(f"KeyError trying to convert the raw data to csv with key: {k} and raw data: {raw_data}")
         return None
     except Exception as e:
-        print(f"Unexpected Error trying to convert the raw data to csv: {e}")
+        log.error(f"Unexpected Error trying to convert the raw data to csv: {e}")
         return None

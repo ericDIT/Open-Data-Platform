@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS public.weather_facts_daily (
   avg_wind_speed NUMERIC,
   avg_visibility NUMERIC,
   load_timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (city_name, record_date)
+  PRIMARY KEY (country, city_name, record_date)
 );
 
 INSERT INTO public.weather_facts_daily (
@@ -28,13 +28,13 @@ SELECT
   rw.country,
   rw.city_name,
   rw.data_received_timestamp_utc::DATE AS record_date,
-  AVG(rw.temperature) AS avg_temp,
+  TRUNC(AVG(rw.temperature),1) AS avg_temp,
   MIN(rw.temp_min) AS min_temp,
   MAX(rw.temp_max) AS max_temp,
-  AVG(rw.humidity) AS avg_humidity,
-  AVG(rw.wind_speed) AS avg_wind_speed,
-  AVG(rw.visibility) AS avg_visibility,
-  CURRENT_TIMESTAMP AS load_timestamp
+  CAST(AVG(rw.humidity) AS INTEGER) AS avg_humidity,
+  TRUNC(AVG(rw.wind_speed), 2) AS avg_wind_speed,
+  CAST(AVG(rw.visibility) AS INTEGER) AS avg_visibility,
+  DATE_TRUNC('second', CURRENT_TIMESTAMP) AS load_timestamp
 FROM
   staging.raw_weather_data rw
 WHERE

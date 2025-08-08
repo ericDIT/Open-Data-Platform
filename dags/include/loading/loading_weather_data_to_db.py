@@ -9,7 +9,7 @@ from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 log = logging.getLogger(__name__)
 
-def load_raw_data_to_pgsql_docker(csv_file_path: str, postgres_conn_id: str, schema: str, table_name: str):
+def load_raw_weather_data_to_pgsql(csv_file_path: str, postgres_conn_id: str, schema: str, table_name: str):
 
     conn=None
     cur=None
@@ -85,6 +85,14 @@ def load_raw_data_to_pgsql_docker(csv_file_path: str, postgres_conn_id: str, sch
 
         conn.commit()
         log.info(f"Data successfully loaded from csv: {csv_file_path} into {schema}.{table_name}")
+        
+        try:
+            if os.path.exists(csv_file_path):
+                os.remove(csv_file_path)
+                log.info(f"Csv: {csv_file_path} successfully removed from directory")
+        except Exception as delete_error:
+            log.warning(f"Csv could not be delete after loading data to db: {delete_error}")        
+
     except FileNotFoundError:
         raise
     except psycopg2.Error as e:

@@ -1,0 +1,2 @@
+city_name,city_id,lon,lat,temperature,feels_like,temp_min,temp_max,pressure,humidity,sea_level,grnd_level,weather_id,weather_main,weather_description,weather_icon,wind_speed,wind_deg,wind_gust,clouds_all,visibility,country,sunrise_utc,sunset_utc,data_received_timestamp_utc,extraction_timestamp_utc
+Berlin,2950159,13.4105,52.5244,16.69,16.74,16.1,17.84,1015,89,1015,1010,520,Rain,light intensity shower rain,09d,4.12,250,,40,10000,DE,2025-08-05 03:32:30+00:00,2025-08-05 18:52:11+00:00,2025-08-05 12:35:50+00:00,2025-08-05 12:40:23.500053+00:00
