@@ -68,8 +68,8 @@ def fetch_weather_data():
         return csv_file_path
 
     except KeyError as k:
-        log.error(f"KeyError trying to convert the raw data to csv with key: {k} and raw data: {raw_data}")
+        log.error(f"KeyError trying to convert the raw weather data to csv with key: {k} and raw data: {raw_data}")
         return None
     except Exception as e:
-        log.error(f"Unexpected Error trying to convert the raw data to csv: {e}")
+        log.error(f"Unexpected Error trying to convert the raw weather data to csv: {e}")
         return None
