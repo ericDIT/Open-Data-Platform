@@ -9,7 +9,6 @@ from include.loading.loading_weather_data_to_db import load_raw_weather_data_to_
 POSTGRES_CONN_ID = "postgres_weather_conn"
 STAGING_SCHEMA = "staging"
 RAW_WEATHER_TABLE = "raw_weather_data"
-HOURLY_FACTS_TABLE = "weather_facts_hourly"
 
 @dag(
     dag_id="dag_weather_hourly",

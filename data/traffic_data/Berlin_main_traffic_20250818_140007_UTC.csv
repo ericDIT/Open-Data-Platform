@@ -1,0 +1,2 @@
+id,frc,currentSpeed,freeFlowSpeed,currentTravelTime,freeFlowTravelTime,confidence,roadClosure,extraction_timestamp_utc
+02dd8659-012b-47a0-91c2-25b759a2264f,FRC1,14,31,186,84,1,False,2025-08-18 14:00:07.184066+00:00

@@ -39,4 +39,4 @@ def transforming_daily_weather():
     
     wait_for_last_hourly_fetch>>transform_daily_weather_facts_task
 
-daily_weather_elt_pipeline()
+transforming_daily_weather()
