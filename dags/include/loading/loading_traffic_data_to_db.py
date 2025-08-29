@@ -45,6 +45,7 @@ def load_raw_traffic_data_to_pgsql(
         create_table_sql_main = sql.SQL("""
             CREATE TABLE IF NOT EXISTS {} (
                 id UUID PRIMARY KEY,
+                city VARCHAR(255),
                 frc VARCHAR(10),
                 currentSpeed NUMERIC,
                 freeFlowSpeed NUMERIC,
@@ -56,18 +57,18 @@ def load_raw_traffic_data_to_pgsql(
             );
         """).format(full_table_name_main)
 
-        create_tabel_sql_coord = sql.SQL("""
+        create_table_sql_coord = sql.SQL("""
             CREATE TABLE IF NOT EXISTS {} (
-                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                traffic_data_id UUID REFERENCES {}(id),
                 latitude DECIMAL(10,8),
-                longitude DECIMAL(11,8)
+                longitude DECIMAL(11,8),
+                extraction_timestamp_utc TIMESTAMP WITH TIME ZONE,
+                traffic_data_id UUID REFERENCES {}(id)
             );
         """).format(full_table_name_coord,full_table_name_main)
 
         log.info(f"Ensuring table '{main_traffic_table}' and '{coord_traffic_table}' in schema '{schema}' exists correctly")
         cur.execute(create_table_sql_main)
-        cur.execute(create_tabel_sql_coord)
+        cur.execute(create_table_sql_coord)
         conn.commit()
         log.info("Tables successfully created / already exist")
 
@@ -79,7 +80,7 @@ def load_raw_traffic_data_to_pgsql(
 
         log.info(f"Loading data from {coord_path} into {full_table_name_coord}")
         with open(coord_path, 'r', newline='', encoding='utf-8') as f:
-            copy_sql = sql.SQL("COPY {}(latitude, longitude, traffic_data_id) FROM STDIN WITH (FORMAT CSV, HEADER, NULL '')").format(full_table_name_coord)
+            copy_sql = sql.SQL("COPY {}(latitude, longitude, extraction_timestamp_utc, traffic_data_id) FROM STDIN WITH (FORMAT CSV, HEADER, NULL '')").format(full_table_name_coord)
             cur.copy_expert(copy_sql, f)
 
         conn.commit()

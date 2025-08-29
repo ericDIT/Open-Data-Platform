@@ -41,6 +41,7 @@ def fetch_traffic_data(lat_lon_point: str):
 
         main_traffic_data = {
             'id': unique_id,
+            'city': city,
             'frc': flow_segment.get('frc'),
             'currentSpeed': flow_segment.get('currentSpeed'),
             'freeFlowSpeed': flow_segment.get('freeFlowSpeed'),
