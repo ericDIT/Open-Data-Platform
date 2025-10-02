@@ -28,6 +28,7 @@ services:
     ports:
       - "8080:8080"
     command: bash /entrypoint.sh
+
   pgadmin:
     image: dpage/pgadmin4:latest
     env_file:
@@ -40,7 +41,16 @@ services:
       -  db
     volumes:
       - pgadmin_data:/var/lib/pgadmin   
-    restart: unless-stopped     
+    restart: unless-stopped
+
+  streamlit:
+    build: ./dashboards/streamlit_app
+    depends_on:
+      - db
+    volumes:
+      - ./dashboards/streamlit_app:/streamlit_app
+    ports:
+      - "8501:8501"
 
 volumes:
   pg_data:
