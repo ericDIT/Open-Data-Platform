@@ -1,0 +1,2 @@
+id,city,frc,currentSpeed,freeFlowSpeed,currentTravelTime,freeFlowTravelTime,confidence,roadClosure,extraction_timestamp_utc
+b6817a31-d699-408b-ad26-bc1ba14010ef,Berlin,FRC1,19,31,137,84,1,False,2025-10-03 21:53:52.050577+00:00
