@@ -74,7 +74,9 @@ def load_raw_traffic_data_to_pgsql(
 
         log.info(f"Loading data from {main_path} into {full_table_name_main}")
         with open(main_path, 'r', newline='', encoding='utf-8') as f:
-            copy_sql = sql.SQL("COPY {} FROM STDIN WITH (FORMAT CSV,HEADER, NULL '')").format(full_table_name_main)
+            
+            column_list_main = sql.SQL("id,city,frc,currentSpeed,freeFlowSpeed,currentTravelTime,freeFlowTravelTime,confidence,roadClosure,extraction_timestamp_utc")
+            copy_sql = sql.SQL("COPY {} ({}) FROM STDIN WITH (FORMAT CSV, HEADER, NULL '')").format(full_table_name_main, column_list_main)
             cur.copy_expert(copy_sql, f)
 
         log.info(f"Loading data from {coord_path} into {full_table_name_coord}")
